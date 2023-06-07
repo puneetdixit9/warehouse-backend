@@ -49,8 +49,6 @@ class BenchmarkProductivity(BaseModel):
     category_id = db.Column(db.ForeignKey("category.id"), nullable=False)
     productivity_experienced_employee = db.Column(db.Float, nullable=False)
     productivity_new_employee = db.Column(db.Float, nullable=False)
-    created_by = db.Column(db.ForeignKey("auth_user.id"))
-    updated_by = db.Column(db.ForeignKey("auth_user.id"), default=None)
     soft_delete_flag = db.Column(db.Integer)
 
     category = db.relationship("Category", backref=db.backref("input_benchmark_productivity", lazy=True))
@@ -77,8 +75,6 @@ class InputDemand(BaseModel):
     date = db.Column(db.Date, nullable=False)
     category_id = db.Column(db.ForeignKey("category.id"), nullable=False)
     demand = db.Column(db.Integer, nullable=False)
-    created_by = db.Column(db.ForeignKey("auth_user.id"))
-    updated_by = db.Column(db.ForeignKey("auth_user.id"), default=None)
     soft_delete_flag = db.Column(db.Integer)
 
     __table_args__ = (db.UniqueConstraint(warehouse_id, category_id, date),)
@@ -98,6 +94,4 @@ class InputRequirements(BaseModel):
     day_working_hours = db.Column(db.Integer, nullable=False)
     cost_per_employee_per_month = db.Column(db.Integer, nullable=False)
     total_hiring_budget = db.Column(db.Integer, nullable=False)
-    created_by = db.Column(db.ForeignKey("auth_user.id"))
-    updated_by = db.Column(db.ForeignKey("auth_user.id"), default=None)
     soft_delete_flag = db.Column(db.Integer)

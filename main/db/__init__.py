@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import g
 
 db = SQLAlchemy()
 
@@ -7,8 +8,11 @@ class BaseModel(db.Model):
     __abstract__ = True
 
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, default=None, onupdate=db.func.now())
+
+    created_on = db.Column(db.DateTime, server_default=db.func.now())
+    created_by = db.Column(db.String(50))
+    modified_on = db.Column(db.DateTime, default=None, onupdate=db.func.now())
+    modified_by = db.Column(db.String(50))
 
     @classmethod
     def create(cls, data: dict) -> db.Model:
@@ -18,6 +22,7 @@ class BaseModel(db.Model):
         :return:
         """
         record = cls(**data)
+        record.created_by = g.user["email"] if g.user else None
         db.session.add(record)
         db.session.commit()
         return record
@@ -28,6 +33,7 @@ class BaseModel(db.Model):
         :param data:
         :return:
         """
+        self.modified_by = g.user["email"] if g.user else None
         for k, v in data.items():
             if hasattr(self, k):
                 setattr(self, k, v)
