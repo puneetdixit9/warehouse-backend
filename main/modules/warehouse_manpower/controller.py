@@ -285,9 +285,9 @@ class DemandController:
             output[str_date][category_name] = {
                 "id": record.InputDemand.id,
                 "demand": record.InputDemand.demand,
-                "created_on": record.InputDemand.created_at,
+                "created_on": record.InputDemand.created_on,
                 "category_id": record.Category.id,
-                "updated_on": record.InputDemand.updated_at,
+                "modified_on": record.InputDemand.modified_on,
             }
             output[str_date]["total"] = output[str_date].get("total", 0) + record.InputDemand.demand
             output["total"][category_name] = output["total"].get(category_name, 0) + record.InputDemand.demand
@@ -378,7 +378,6 @@ class RequirementController:
 
 
 class ResultController:
-
     @classmethod
     def calculate_manpower(cls, requirement_data: dict) -> dict:
         """

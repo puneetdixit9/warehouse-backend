@@ -1,4 +1,4 @@
-# Starter Kit using Python in Flask framework
+# Warehouse Manpower Planner
 
 ## Server Setup
 * Install Python 3.10
@@ -15,6 +15,7 @@ $ pip install -r requirements.txt
 ```doctest
 DATABASE_URL=mysql+mysqlconnector://<DB_USERNAME>:<DB_PASSWORD>@<DB_HOST>:<DB_PORT>/<DB_NAME>
 TESTING_DATABASE_URL=mysql+mysqlconnector://<TEST_DB_USERNAME>:<TEST_DB_PASSWORD>@<TEST_DB_HOST>:<TEST_DB_PORT>/<TEST_DB_NAME>
+USER_MANAGEMENT_PORTAL_URL=<USER_MANAGEMENT_PORTAL_URL>
 SECRET_KEY=<YOUR SECRET KEY>
 CACHE_REDIS_HOST=<REDIS_HOST>
 CACHE_REDIS_PORT=<REDIS_PORT>
